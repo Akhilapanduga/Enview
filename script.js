@@ -30,24 +30,15 @@ const alerts = [
     const alertsContainer = document.getElementById('alerts-container');
     const vehicleDropdown = document.getElementById('vehicle-search');
     const freeTextSearch = document.getElementById('free-text-search');
-  
-    // Render the complete data when the page is loaded
     renderAlerts(alerts);
-  
-    // Listen for input changes on free text search
     freeTextSearch.addEventListener('input', function () {
       const filteredAlerts = filterAlerts();
       renderAlerts(filteredAlerts);
     });
-  
-    // Add an event listener for the click event on the vehicle dropdown
     vehicleDropdown.addEventListener('change', function () {
-        //console.log('Vehicle Dropdown Changed');
         const filteredAlerts = filterAlerts();
         renderAlerts(filteredAlerts);
       });
-  
-    // Initialize the vehicle dropdown with a placeholder option
     populateVehicleDropdown();
   });
   
@@ -74,10 +65,7 @@ function filterAlerts() {
         (isNaN(endDate.getTime()) || new Date(alert.timestamp) <= endDate)
     );
 }
-
-// ... (your existing code)
-
-  
+ 
   function renderAlerts(filteredAlerts) {
     const alertsContainer = document.getElementById('alerts-container');
     alertsContainer.innerHTML = '';
@@ -104,21 +92,19 @@ function filterAlerts() {
     }
   }
   
-  // Function to dynamically populate the vehicle dropdown
 function populateVehicleDropdown() {
-    console.log('Populating vehicle dropdown');
+   
     const vehicleDropdown = document.getElementById('vehicle-search');
-    // Clear existing options
+    
     vehicleDropdown.innerHTML = '';
-    // Add a placeholder option
+  
     const placeholderOption = document.createElement('option');
     placeholderOption.value = '';
     placeholderOption.textContent = 'Select Vehicle';
     vehicleDropdown.appendChild(placeholderOption);
-    // Extract unique vehicle numbers from alerts
+    
     const uniqueVehicleNumbers = [...new Set(alerts.map(alert => alert.vehicle_friendly_name))];
-    //console.log('Unique Vehicle Numbers:', uniqueVehicleNumbers);
-    // Populate the dropdown with unique vehicle numbers
+
     uniqueVehicleNumbers.forEach(vehicleNumber => {
       const option = document.createElement('option');
       option.value = vehicleNumber;
